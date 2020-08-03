@@ -1,0 +1,52 @@
+<script>
+var studentsGroupA = [78, 65, 12, 56, 67, 92, 95, 98];
+var studentsGroupB = [23,56, 90, 100, 67, 74, 12, 67];
+
+var goodPoint = 89;
+var normPoints = [65, 88];
+
+/* ===========  Entry point  =========== */
+initStudentCount(studentsGroupA, studentsGroupB);
+
+function initStudentCount(){
+    console.log(...arguments)
+	var allStudents = [].concat(...arguments);
+    var sortedStudents = findStudentsMark(allStudents);
+    displayStudentsMark(sortedStudents);
+}
+
+
+/* ===========  Бізнес логіка задачі  =========== */
+
+/* ===========  Сортування студентів =========== */
+function findStudentsMark(students){
+	var goodStudents=[], normStudents = [], badStudents= [];
+	for(let studentMark of students){
+        if(studentMark >= goodPoint){
+            sortStudents(studentMark, goodStudents)  //console.log(studentMark, "Good mark")
+        }else if(studentMark >= normPoints[0] && studentMark <= normPoints[1]){
+            sortStudents(studentMark, normStudents) //console.log(studentMark, "Norm mark")
+        }else{
+            sortStudents(studentMark, badStudents)  //console.log(studentMark, "Bad mark")
+        }
+    }
+    return [].concat([goodStudents], [normStudents], [badStudents]) 
+}
+
+function sortStudents(studentMark, array){
+  return array.push(studentMark)
+}
+
+
+/* ===========  Відображення результатів =========== */
+function displayStudentsMark(sortedStudents){
+	for(let i = 0; i < sortedStudents.length; i++){
+        if(i == 0) document.write("<br><br> Good Students A+ <hr>")
+        else if(i == 1) document.write("<br><br> Normal Students B <hr>")
+        else if(i == 2) document.write("<br><br> Bad Students C <hr>")
+        for(let j = 0; j < sortedStudents[i].length; j++){
+      	    document.write(` ${j+1}) ${sortedStudents[i][j]}<br>`)
+        }
+    }
+}
+</script>
